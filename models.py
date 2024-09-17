@@ -8,7 +8,7 @@ def get_db():
     return conn
 
 def init_db():
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect(Database)
     cursor = conn.cursor()
 
     cursor.execute('''
