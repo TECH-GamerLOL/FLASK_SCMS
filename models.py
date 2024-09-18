@@ -18,24 +18,23 @@ def init_db():
     
     # Create Admins table
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS Admin (
+        CREATE TABLE IF NOT EXISTS Admins (
             adminID INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER,
+            userID INTEGER,
             department TEXT,
-            FOREIGN KEY(user_id) REFERENCES Users(user_id)
+            FOREIGN KEY(userID) REFERENCES Users(userID)
         )
     ''')
     
     # Create Complaints table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS Complaints (
-            complaint_id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER,
-            subject TEXT,
+            complaintID INTEGER PRIMARY KEY AUTOINCREMENT,
+            userID INTEGER,
             description TEXT,
             severity TEXT,
             status TEXT,
-            FOREIGN KEY(user_id) REFERENCES Users(user_id)
+            FOREIGN KEY(userID) REFERENCES Users(userID)
         )
     ''')
     

@@ -2,9 +2,23 @@
 
 {% block content %}
 <h2>All Admins</h2>
+
 <ul>
     {% for admin in admins %}
-    <li>Admin ID: {{ admin[0] }}, Department: {{ admin[2] }}</li>
+    <li>ID: {{ admin[0] }}, Username: {{ admin[1] }}, Email: {{ admin[2] }}, Name: {{ admin[3] }}, Phone: {{ admin[4] }}, Department: {{ admin[5] }}</li>
     {% endfor %}
 </ul>
+
+<h3>Add New Admin</h3>
+<form method="POST" action="/admins" enctype="multipart/form-data"> >
+    {{ form.hidden_tag() }}
+    <p>{{ form.username.label }} {{ form.username }}</p>
+    <p>{{ form.email.label }} {{ form.email }}</p>
+    <p>{{ form.password.label }} {{ form.password }}</p>
+    <p>{{ form.name.label }} {{ form.name }}</p>
+    <p>{{ form.phone_number.label }} {{ form.phone_number }}</p>
+    <p>{{ form.department.label }} {{ form.department }}</p>
+    <p>{{ form.submit }}</p>
+</form>
+
 {% endblock %}

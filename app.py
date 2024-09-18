@@ -1,6 +1,8 @@
+# app.py
+
 from flask import Flask
-from models import init_db
 import views
+from models import init_db  # Ensure init_db is imported correctly
 
 # Initialize the Flask app
 app = Flask(__name__)
@@ -11,11 +13,26 @@ app.config['SECRET_KEY'] = 'your_secret_key'
 # Initialize the database
 init_db()
 
-# Register routes from views.py
-app.add_url_rule('/', 'index', views.index)  # Change 'home' to 'index'
-app.add_url_rule('/users', 'users', views.users)
-app.add_url_rule('/admins', 'admins', views.admins)
-app.add_url_rule('/complaints', 'complaints', views.complaints, methods=['GET', 'POST'])
+# Register routes using decorators
+@app.route('/')
+def index():
+    return views.index()
+
+@app.route('/users')
+def users():
+    return views.users()
+
+@app.route('/admins')
+def admins():
+    return views.admins()
+
+@app.route('/complaints', methods=['GET', 'POST'])
+def complaints():
+    return views.complaints()
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    return views.register()
 
 if __name__ == '__main__':
     app.run(debug=True)

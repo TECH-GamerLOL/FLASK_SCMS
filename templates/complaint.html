@@ -1,21 +1,37 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h2>All Complaints</h2>
 
-{% block content %}
-<h2>All Complaints</h2>
+    <!-- List all complaints -->
+    <ul>
+        {% for complaint in complaints %}
+        <li>Subject: {{ complaint[1] }}, Status: {{ complaint[4] }}</li>
+        {% endfor %}
+    </ul>
 
-<ul>
-    {% for complaint in complaints %}
-    <li>Subject: {{ complaint[2] }}, Status: {{ complaint[5] }}</li>
-    {% endfor %}
-</ul>
-
-<h3>Submit a Complaint</h3>
-<form method="POST">
-    {{ form.hidden_tag() }}
-    <p>{{ form.subject.label }} {{ form.subject }}</p>
-    <p>{{ form.description.label }} {{ form.description }}</p>
-    <p>{{ form.severity.label }} {{ form.severity }}</p>
-    <p>{{ form.submit }}</p>
-</form>
-
-{% endblock %}
+    <!-- Complaint submission form -->
+    <h3>Submit a Complaint</h3>
+    <form method="post" action="/complaints" enctype="multipart/form-data"> 
+        {{ form.csrf_token }} 
+        <p>{{ form.subject.label }} {{ form.subject() }}</p>
+        <p>{{ form.description.label }} {{ form.description() }}</p>
+        <p>{{ form.severity.label }} {{ form.severity() }}</p>
+        <p><input type="submit" value="Submit"></p> 
+    </form> 
+    
+    <!-- <form method="POST">
+        {{ form.hidden_tag() }}
+        <p>{{ form.subject.label }} {{ form.subject() }}</p>
+        <p>{{ form.description.label }} {{ form.description() }}</p>
+        <p>{{ form.severity.label }} {{ form.severity() }}</p>
+        <p>{{ form.submit() }}</p>
+    </form> -->
+</body>
+</html>
