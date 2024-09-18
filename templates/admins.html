@@ -1,23 +1,10 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <h2>Admin Page</h2>
-    <p>Here you can view all students and manage complaints.</p>
-    <!-- Example table for displaying students -->
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for student in students %}
-                <tr>
-                    <td>{{ student[0] }}</td>
-                    <td>{{ student[1] }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<h2>All Admins</h2>
+<ul>
+    {% for admin in admins %}
+    <li>Admin ID: {{ admin[0] }}, Department: {{ admin[2] }}</li>
+    {% endfor %}
+</ul>
 {% endblock %}

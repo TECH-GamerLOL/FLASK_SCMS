@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>All Complaints</h2>
+
+<ul>
+    {% for complaint in complaints %}
+    <li>Subject: {{ complaint[2] }}, Status: {{ complaint[5] }}</li>
+    {% endfor %}
+</ul>
+
+<h3>Submit a Complaint</h3>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <p>{{ form.subject.label }} {{ form.subject }}</p>
+    <p>{{ form.description.label }} {{ form.description }}</p>
+    <p>{{ form.severity.label }} {{ form.severity }}</p>
+    <p>{{ form.submit }}</p>
+</form>
+
+{% endblock %}
