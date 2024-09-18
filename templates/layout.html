@@ -7,25 +7,23 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-
     <header>
         <h1>Student Complaint Management System</h1>
     </header>
-
+    
     <nav>
-        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('index') }}">Home</a> <!-- Change 'home' to 'index' -->
         <a href="{{ url_for('users') }}">Users</a>
         <a href="{{ url_for('admins') }}">Admins</a>
         <a href="{{ url_for('complaints') }}">Complaints</a>
     </nav>
 
-    <div class="container">
+    <div class="content">
         {% block content %}{% endblock %}
     </div>
 
     <footer>
-        <p>&copy; 2024 Student Complaint System</p>
+        <p>SCMS &copy; 2024</p>
     </footer>
-
 </body>
 </html>
