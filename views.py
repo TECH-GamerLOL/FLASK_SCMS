@@ -9,7 +9,7 @@ def index():
 def users():
     conn = sqlite3.connect('SCMS.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM Users')
+    cursor.execute('SELECT * FROM User')
     users_data = cursor.fetchall()
     conn.close()
     return render_template('users.html', users=users_data)
@@ -18,7 +18,7 @@ def users():
 def admins():
     conn = sqlite3.connect('SCMS.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM Admins')
+    cursor.execute('SELECT * FROM Admin')
     admins_data = cursor.fetchall()
     conn.close()
     return render_template('admins.html', admins=admins_data)
@@ -26,13 +26,13 @@ def admins():
 # Complaints page (GET and POST)
 def complaints():
     if request.method == 'POST':
-        user_id = request.form['user_id']
+        student_id = request.form['StudentID']
         description = request.form['description']
-        severity = request.form['severity']
+        status = request.form['status']
         
         conn = sqlite3.connect('SCMS.db')
         cursor = conn.cursor()
-        cursor.execute('INSERT INTO Complaints (user_id, description, severity) VALUES (?, ?, ?)', (user_id, description, severity))
+        cursor.execute('INSERT INTO Complaints (student_id, description, status) VALUES (?, ?, ?)', (student_id, description, status))
         conn.commit()
         conn.close()
         return redirect(url_for('complaints'))
@@ -42,4 +42,4 @@ def complaints():
     cursor.execute('SELECT * FROM Complaints')
     complaints_data = cursor.fetchall()
     conn.close()
-    return render_template('complaints.html', complaints=complaints_data)
+    return render_template('complaint.html', complaints=complaints_data)

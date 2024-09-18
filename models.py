@@ -9,16 +9,17 @@ def init_db():
     # Create Users table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS Users (
-            user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            userID INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT NOT NULL,
-            email TEXT NOT NULL
+            email TEXT NOT NULL,
+            password TEXT NOT NULL
         )
     ''')
     
     # Create Admins table
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS Admins (
-            admin_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        CREATE TABLE IF NOT EXISTS Admin (
+            adminID INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id INTEGER,
             department TEXT,
             FOREIGN KEY(user_id) REFERENCES Users(user_id)
