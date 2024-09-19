@@ -2,6 +2,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SelectField, SubmitField, EmailField, PasswordField
 from wtforms.validators import DataRequired, Email, EqualTo, Length
+from email_validator import validate_email, EmailNotValidError
 
 class ComplaintForm(FlaskForm):
     subject = StringField('Subject', validators=[DataRequired()])
@@ -33,3 +34,14 @@ class AdminRegistrationForm(FlaskForm):
     phone_number = StringField('Phone Number')
     department = StringField('Department')
     submit = SubmitField('Register')
+
+class RegisterForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(min=3, max=20)])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
+    submit = SubmitField('Register')
+
+class LoginForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Login')

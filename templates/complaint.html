@@ -9,29 +9,28 @@
 <body>
     <h2>All Complaints</h2>
 
-    <!-- List all complaints -->
     <ul>
         {% for complaint in complaints %}
-        <li>Subject: {{ complaint[1] }}, Status: {{ complaint[4] }}</li>
+        <li>Subject: {{ complaint[1] }}, Description: {{ complaint[2] }}, Severity: {{ complaint[3] }}, Status: {{ complaint[4] }}</li>
         {% endfor %}
     </ul>
-
-    <!-- Complaint submission form -->
-    <h3>Submit a Complaint</h3>
-    <form method="post" action="/complaints" enctype="multipart/form-data"> 
-        {{ form.csrf_token }} 
-        <p>{{ form.subject.label }} {{ form.subject() }}</p>
-        <p>{{ form.description.label }} {{ form.description() }}</p>
-        <p>{{ form.severity.label }} {{ form.severity() }}</p>
-        <p><input type="submit" value="Submit"></p> 
-    </form> 
     
-    <!-- <form method="POST">
+    <h3>Submit a Complaint</h3>
+    <form method="POST" action="/complaints">
         {{ form.hidden_tag() }}
-        <p>{{ form.subject.label }} {{ form.subject() }}</p>
-        <p>{{ form.description.label }} {{ form.description() }}</p>
-        <p>{{ form.severity.label }} {{ form.severity() }}</p>
-        <p>{{ form.submit() }}</p>
-    </form> -->
+        <div class="form-group">
+            <label for="subject">{{ form.subject.label }}</label>
+            {{ form.subject }}
+        </div>
+        <div class="form-group">
+            <label for="description">{{ form.description.label }}</label>
+            {{ form.description }}
+        </div>
+        <div class="form-group">
+            <label for="severity">{{ form.severity.label }}</label>
+            {{ form.severity }}
+        </div>
+        <button type="submit" class="btn">Submit Complaint</button>
+    </form>
 </body>
 </html>

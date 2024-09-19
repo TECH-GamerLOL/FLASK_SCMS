@@ -37,6 +37,6 @@ def init_db():
             FOREIGN KEY(userID) REFERENCES Users(userID)
         )
     ''')
-    
+
     conn.commit()
     conn.close()
