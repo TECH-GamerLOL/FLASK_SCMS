@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Student Complaint Management System</h1>
+    </header>
+
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('complaints') }}">Complaints</a>
+        <a href="{{ url_for('profile') }}">Profile</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+
+    <div class="container">
+        <h2>Profile</h2>
+        
+        {% if user_info %}
+        <div class="profile-info">
+            <p><strong>Username:</strong> {{ user_info[0] }}</p>
+        </div>
+        {% else %}
+        <p>No profile information available.</p>
+        {% endif %}
+
+        <h3>Update Password</h3>
+        <form method="POST" action="{{ url_for('profile') }}">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.current_password.label }}
+                {{ form.current_password(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.new_password.label }}
+                {{ form.new_password(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+
+        <h3>Your Complaints</h3>
+        <ul>
+            {% if complaints %}
+                {% for complaint in complaints %}
+                <li>
+                    <strong>Subject:</strong> {{ complaint[0] }},
+                    <strong>Description:</strong> {{ complaint[1] }},
+                    <strong>Severity:</strong> {{ complaint[2] }},
+                    <strong>Status:</strong> {{ complaint[3] }}
+                </li>
+                {% endfor %}
+            {% else %}
+                <p>You have not submitted any complaints yet.</p>
+            {% endif %}
+        </ul>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Student Complaint Management System</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+
+    <nav>
+        <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+
+    <div class="container">
+        <h2>Welcome, Admin</h2>
+        
+        <form action="{{ url_for('admin_complaints') }}" method="GET">
+            <button type="submit" class="btn">View Complaints</button>
+        </form>
+        
+        <form action="{{ url_for('admin_users') }}" method="GET">
+            <button type="submit" class="btn">View Users</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Student Complaint Management System</p>
+    </footer>
+</body>
+</html>

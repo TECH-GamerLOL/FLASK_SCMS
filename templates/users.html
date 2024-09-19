@@ -1,24 +1,54 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>User Management</h1>
+    </header>
 
-{% block content %}
-<h2>All Users</h2>
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('complaints') }}">Complaints</a>
+        <a href="{{ url_for('profile') }}">Profile</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
 
-<ul>
-    {% for user in users %}
-    <li>ID: {{ user[0] }}, Username: {{ user[1] }}, Email: {{ user[2] }}, Name: {{ user[3] }}, Contact: {{ user[4] }}, Role: {{ user[5] }}</li>
-    {% endfor %}
-</ul>
+    <div class="container">
+        <h2>All Users</h2>
 
-<h3>Add New User</h3>
-<form method="POST" action="/users" enctype="multipart/form-data">
-    {{ form.hidden_tag() }}
-    <p>{{ form.username.label }} {{ form.username }}</p>
-    <p>{{ form.email.label }} {{ form.email }}</p>
-    <p>{{ form.password.label }} {{ form.password }}</p>
-    <p>{{ form.name.label }} {{ form.name }}</p>
-    <p>{{ form.contact_number.label }} {{ form.contact_number }}</p>
-    <p>{{ form.role.label }} {{ form.role }}</p>
-    <p><button type="submit" class="btn">Add User</button></p>
-</form>
+        {% if users %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user[0] }}</td> <!-- ID -->
+                            <td>{{ user[1] }}</td> <!-- Username -->
+                            <td>{{ user[2] }}</td> <!-- Email -->
+                            <td>{{ user[3] }}</td> <!-- Role -->
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No users found.</p>
+        {% endif %}
+    </div>
 
-{% endblock %}
+    <footer>
+        <p>&copy; 2024 Student Complaint Management System</p>
+    </footer>
+</body>
+</html>

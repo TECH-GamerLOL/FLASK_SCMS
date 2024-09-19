@@ -3,20 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complaints</title>
+    <title>Submit Complaint</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h2>All Complaints</h2>
-
-    <ul>
-        {% for complaint in complaints %}
-        <li>Subject: {{ complaint[1] }}, Description: {{ complaint[2] }}, Severity: {{ complaint[3] }}, Status: {{ complaint[4] }}</li>
-        {% endfor %}
-    </ul>
+    <header>
+        <h1>Submit Your Complaint</h1>
+    </header>
     
-    <h3>Submit a Complaint</h3>
-    <form method="POST" action="/complaints">
+    <form method="POST" action="{{ url_for('complaints') }}">
         {{ form.hidden_tag() }}
         <div class="form-group">
             <label for="subject">{{ form.subject.label }}</label>
@@ -31,6 +26,7 @@
             {{ form.severity }}
         </div>
         <button type="submit" class="btn">Submit Complaint</button>
+        <a href="{{ url_for('index') }}" class="btn btn-cancel">Cancel</a> <!-- Cancel Button -->
     </form>
 </body>
 </html>

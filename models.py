@@ -9,11 +9,13 @@ def init_db():
     # Create Users table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS Users (
-            userID INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT NOT NULL,
-            email TEXT NOT NULL,
-            password TEXT NOT NULL
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL UNIQUE,
+            email TEXT NOT NULL UNIQUE,
+            password_hash TEXT NOT NULL,
+            role TEXT NOT NULL
         )
+
     ''')
     
     # Create Admins table
@@ -37,6 +39,9 @@ def init_db():
             FOREIGN KEY(userID) REFERENCES Users(userID)
         )
     ''')
+
+
+
 
     conn.commit()
     conn.close()

@@ -10,16 +10,23 @@
     <header>
         <h1>Welcome to the Student Complaint Management System</h1>
     </header>
-        <p>Use the navigation above to access different sections of the system:</p>
-        
-        <div class="button-container">
-            <a href="{{ url_for('users') }}" class="btn">Users</a>
-            <a href="{{ url_for('admins') }}" class="btn">Admins</a>
-            <a href="{{ url_for('complaints') }}" class="btn">Complaints</a>
-            <a href="{{ url_for('register') }}" class="btn">Register</a>
+    
+    <p>Use the navigation above to access different sections of the system:</p>
+    
+    <div class="button-container">
+        {% if 'userID' in session %}
+            {% if session['role'] == 'admin' %}
+                <a href="{{ url_for('admin_complaints') }}" class="btn">Manage Complaints</a>
+            {% endif %}
+            <a href="{{ url_for('profile') }}" class="btn">Profile</a>
+            <a href="{{ url_for('complaints') }}" class="btn">Submit Complaint</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        {% else %}
             <a href="{{ url_for('login') }}" class="btn">Login</a>
-        </div>
-        
+            <a href="{{ url_for('register') }}" class="btn">Register</a>
+        {% endif %}
+    </div>
+
     <div class="content">
         <h2>This is the Home Page</h2>
         <p>Manage student complaints efficiently.</p>
